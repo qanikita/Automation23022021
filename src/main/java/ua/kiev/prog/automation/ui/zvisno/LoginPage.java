@@ -11,8 +11,6 @@ import java.util.List;
 
 public class LoginPage extends BasePage {
 
-    final private WebDriver _driver = Session.getInstance().wd();
-
     final private By errorMessageLocator    = By.xpath("//div[contains(@class, 'alert-danger')]");
     final private By loginLocator           = By.xpath("//input[@id='input-email']");
     final private By passwordLocator        = By.xpath("//input[@id='input-password']");
@@ -33,7 +31,7 @@ public class LoginPage extends BasePage {
 
     public List<String> getErrorMessages() {
         List<String> result = new ArrayList<>();
-        List<WebElement> errors = _driver.findElements(errorMessageLocator);
+        List<WebElement> errors = driver().findElements(errorMessageLocator);
         for (WebElement err : errors){
             try {
                 result.add(err.getText());
