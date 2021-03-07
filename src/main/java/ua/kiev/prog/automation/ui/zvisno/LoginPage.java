@@ -1,15 +1,17 @@
 package ua.kiev.prog.automation.ui.zvisno;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ua.kiev.prog.automation.base.UITest;
+import ua.kiev.prog.automation.base.Session;
+import ua.kiev.prog.automation.base.page.BasePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
-    final private UITest _test;
+    final private WebDriver _driver = Session.getInstance().wd();
 
     final private By errorMessageLocator    = By.xpath("//div[contains(@class, 'alert-danger')]");
     final private By loginLocator           = By.xpath("//input[@id='input-email']");
@@ -17,14 +19,11 @@ public class LoginPage {
     final private By submitBtnLocator       = By.xpath("//input[@type='submit']");
 
 
-    public LoginPage (UITest test){
-        this._test = test;
-    }
 
     public void login (String username, String password){
-        WebElement login = _test.driver.findElement(loginLocator);
-        WebElement passwd = _test.driver.findElement(passwordLocator);
-        WebElement submitButton = _test.driver.findElement(submitBtnLocator);
+        WebElement login = driver().findElement(loginLocator);
+        WebElement passwd = driver().findElement(passwordLocator);
+        WebElement submitButton = driver().findElement(submitBtnLocator);
         login.clear();
         login.sendKeys(username);
         passwd.clear();
@@ -34,7 +33,7 @@ public class LoginPage {
 
     public List<String> getErrorMessages() {
         List<String> result = new ArrayList<>();
-        List<WebElement> errors = _test.driver.findElements(errorMessageLocator);
+        List<WebElement> errors = _driver.findElements(errorMessageLocator);
         for (WebElement err : errors){
             try {
                 result.add(err.getText());

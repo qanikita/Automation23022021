@@ -1,10 +1,10 @@
-package ua.kiev.prog.automation;
+package ua.kiev.prog.automation.junit;
 
 import org.junit.jupiter.api.Test;
-import ua.kiev.prog.automation.base.UITest;
+import ua.kiev.prog.automation.base.UIJUnitTest;
 import ua.kiev.prog.automation.ui.zvisno.MainMenuPage;
 
-public class MainMenuNavigationTest extends UITest {
+public class MainMenuNavigationJUnitTest extends UIJUnitTest {
 
     final private MainMenuPage MainMenuPage = new MainMenuPage(this);
 
@@ -14,7 +14,7 @@ public class MainMenuNavigationTest extends UITest {
         MainMenuPage.clickMenuItem("Desktops");
         Thread.sleep(2000);
 
-        MainMenuPage.clickSubMenuItem("Components","Printers (0)");
+        MainMenuPage.clickSubMenuItem("Components","Printers");
         Thread.sleep(5000);
 
     }
