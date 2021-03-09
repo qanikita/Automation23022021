@@ -45,12 +45,12 @@ public class MainMenuNavigationJUnitTest extends UIJUnitTest {
 
         final public String menuItems;
         final public String subMenuItem;
-        final public Integer quantity;
+
 
         MenuData(String menuItems, String subMenuItem, Integer quantity) {
             this.menuItems = menuItems;
             this.subMenuItem = subMenuItem;
-            this.quantity = quantity;
+
 
         }
     }
@@ -61,7 +61,7 @@ public class MainMenuNavigationJUnitTest extends UIJUnitTest {
 
         mainMenuPage.clickMenuItem("Desktops");
 
-        mainMenuPage.clickSubMenuItem(data.menuItems,data.subMenuItem,data.quantity);
+        mainMenuPage.clickSubMenuItem(data.menuItems,data.subMenuItem);
         Thread.sleep(1000);
 
     }

@@ -1,5 +1,6 @@
 package ua.kiev.prog.automation.testng;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ua.kiev.prog.automation.base.UITestNGSingleSessionTest;
@@ -9,8 +10,8 @@ public class MainMenuTestNGTest extends UITestNGSingleSessionTest {
 
     final private MainMenuPage mainMenuPage = new MainMenuPage();
 
-    @DataProvider(name = "menuData")
-    public Object[][] menuData(){
+    @DataProvider(name = "mainMenuData")
+    public Object[][] mainMenuData(){
         return new Object[][]{
                 {"Desktops",                "PC",                       0}, //Open PC page
                 {"Desktops",                "Mac",                      1}, //Open Mac page
@@ -39,13 +40,15 @@ public class MainMenuTestNGTest extends UITestNGSingleSessionTest {
                 {"MP3 Players",             "test 7",                   0}, //Open test 7 page
                 {"MP3 Players",             "test 8",                   0}, //Open test 8 page
                 {"MP3 Players",             "test 9",                   0}, //Open test 9 page
+                {"Tables",                  null,                       1}
         };
     }
 
-    @Test(dataProvider = "menuData")
-    public void clickMenuItems (String menuItems, String subMenuItem, Integer quantity) throws InterruptedException {
-        mainMenuPage.clickSubMenuItem(menuItems,subMenuItem,quantity);
+    @Test(dataProvider = "mainMenuData")
+    public void clickMenuItems (String menuItems, String subMenuItem, Integer count) throws InterruptedException {
+        mainMenuPage.clickSubMenuItem(menuItems,subMenuItem);
         Thread.sleep(1000);
+        Assert.assertEquals(mainMenuPage.getProductItemsCount(),count);
 
     }
 }

@@ -13,8 +13,8 @@ public class MainMenuPage extends BasePage {
     final private By menuItemLocator (String menuItemName){
         return By.xpath(String.format("//nav[@id='menu']//ul/li/a[text()='%s']", menuItemName));
     }
-    final private By subMenuItemLocator (String subMenuItemName, Integer quantity){
-        return By.xpath(String.format("..//div[contains(@class, 'dropdown-menu')]//ul/li/a[contains(text(),'%s (%s)')]", subMenuItemName,quantity));
+    final private By subMenuItemLocator (String subMenuItemName){
+        return By.xpath(String.format("..//div[contains(@class, 'dropdown-menu')]//ul/li/a[contains(text(),'%s')]", subMenuItemName));
     }
 
 
@@ -23,13 +23,18 @@ public class MainMenuPage extends BasePage {
         menuItem.click();
     }
 
-    public void clickSubMenuItem (String menuItemName, String subMenuItemName,Integer quantity) {
+    public void clickSubMenuItem (String menuItemName, String subMenuItemName) {
         WebElement menuItem = driver().findElement(menuItemLocator(menuItemName));
         menuItem.click();
-        WebElement subMenuItem = menuItem.findElement(subMenuItemLocator(subMenuItemName,quantity));
+        WebElement subMenuItem = menuItem.findElement(subMenuItemLocator(subMenuItemName));
         subMenuItem.isDisplayed();
         subMenuItem.click();
 
+
+    }
+
+    public Integer getProductItemsCount() {
+        return driver().findElements(By.xpath("//div[@id='content']//div[contains(@class,'product-grid')]")).size();
     }
 }
 
