@@ -22,6 +22,10 @@ public class MainMenuTestNGTest extends UITestNGSingleSessionTest {
                 {"Components",              "Printers",                 0}, //Open Printers page
                 {"Components",              "Scanners",                 0}, //Open Scanners page
                 {"Components",              "Web Cameras",              0}, //Open Web Cameras page
+                {"Tablets",                 null,                       1}, //Open Tablets page
+                {"Software",                null,                       0}, //Open Software page
+                {"Phones & PDAs",           null,                       3}, //Open Phones & PDAs page
+                {"Cameras",                 null,                       2}, //Open Cameras page
                 {"MP3 Players",             "test 11",                  0}, //Open test 11 page
                 {"MP3 Players",             "test 12",                  0}, //Open test 12 page
                 {"MP3 Players",             "test 15",                  0}, //Open test 15 page
@@ -40,13 +44,16 @@ public class MainMenuTestNGTest extends UITestNGSingleSessionTest {
                 {"MP3 Players",             "test 7",                   0}, //Open test 7 page
                 {"MP3 Players",             "test 8",                   0}, //Open test 8 page
                 {"MP3 Players",             "test 9",                   0}, //Open test 9 page
-                {"Tables",                  null,                       1}
         };
     }
 
     @Test(dataProvider = "mainMenuData")
     public void clickMenuItems (String menuItems, String subMenuItem, Integer count) throws InterruptedException {
-        mainMenuPage.clickSubMenuItem(menuItems,subMenuItem);
+        if (subMenuItem != null) {
+            mainMenuPage.clickSubMenuItem(menuItems, subMenuItem);
+        }else {
+            mainMenuPage.clickMenuItem(menuItems);
+        }
         Thread.sleep(1000);
         Assert.assertEquals(mainMenuPage.getProductItemsCount(),count);
 
